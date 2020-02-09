@@ -1,132 +1,243 @@
 <!DOCTYPE html>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
   <title>Smart College</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="https://png.pngtree.com/svg/20161123/97bea0669c.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content { height:450px;
-    			   padding-top:10px;
-    			  }
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      padding-top:30px;
-      height:100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 40px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style>
-</head>
-<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/SmartCollege/Home">Home</a></li>
-        <li><a href="#">Professors</a></li>
-        <li><a href="/SmartCollege/Subject">Subjects</a></li>
-        <li><a href="/SmartCollege/Contact">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+	
+body{
+    background-color: #E3D883;
+}
+/*
+Timeline
+*/
+.navbar .dropdown-menu {
+  padding: 10px;
+  margin-top: 7.2px;
+  background-color: #353A40;
+}
+.navbar .dropdown-menu .dropdown-item {
+  position: relative;
+  padding: 8px 15px;
+  color: #fff;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  transition: color 0.2s ease-in;
+}
+.navbar .dropdown-menu .dropdown-item:last-child {
+  border-bottom: none;
+}
+.navbar .dropdown-menu .dropdown-item:hover {
+  background: transparent;
+  color: #c0ca33;
+}
+.navbar .dropdown-menu .dropdown-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: 5px;
+  background-color: #c0ca33;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+.navbar .dropdown-menu .dropdown-item:hover::before {
+  opacity: 1;
+}
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  margin: auto;
+  width: 79%;
+}
+
+/* Fake image */
+.fakeimg {
+  width: 100%;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom:20px;
+}
+
+.post-meta {
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+.post-meta li:not(:last-child) {
+    margin-right: 10px;
+}
+
+h1 { color: #7c795d; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+
+
+h2 { color: #7c795d; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0 0 24px; }
+
+
+.subheader { font-size: 26px; font-weight: 300; color: #ffcc66; margin: 0 0 24px; }
+
+p { color: #4c4a37; font-family: 'Source Sans Pro', sans-serif; font-size: 18px; line-height: 32px;}
+
+</style>
+
+
+</head>
+
+<body style="background-color: #F2F6B1">
+	
+	<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
+  <div class="container">
+    <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Home">Home
+              </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/SmartCollege/News">News</a>
+        </li>
+        <c:choose>
+    	<c:when test="${role == 'STUDENT'}">
+        <li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">Subjects</a>
+						<div class="dropdown-menu">
+							<a href="/SmartCollege/FirstYear" class="dropdown-item">First Year</a>
+							<a href="/SmartCollege/SecondYear" class="dropdown-item">Second Year</a>
+							<a href="/SmartCollege/ThirdYear" class="dropdown-item">Third Year</a>
+						</div>
+		</li>
+		</c:when>
+        </c:choose>
+        <c:choose>
+    	<c:when test="${role == 'PROFESSOR'}">
+        <li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">My Subjects</a>
+						<div class="dropdown-menu">
+							<c:forEach var = "subject" items = "${profsubjects}">
+						    <input type="hidden" class="form-control" value = "${userId}" name= "idd" id= "idd" required>
+							<a href="/SmartCollege/ViewSubject?id=${subject.idSubject}&user=${userId}" class="dropdown-item">${subject.subjectName}</a>
+						    </c:forEach>
+						</div>
+		</li>
+		</c:when>
+        </c:choose>
+        <c:choose>
+    	<c:when test="${role == 'ADMIN'}">
+        <li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">Add</a>
+						<div class="dropdown-menu">
+							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professor</a>
+							<a href="/SmartCollege/NewSubject" class="dropdown-item">Subject</a>
+							<a href="/SmartCollege/NewContact" class="dropdown-item">Contact</a>
+							<a href="/SmartCollege/AddAnnouncement" class="dropdown-item"></a>
+						</div>
+		</li>
+		<li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">View</a>
+						<div class="dropdown-menu">
+							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professors</a>
+							<a href="/SmartCollege/Subject" class="dropdown-item">Subjects</a>
+							<a href="/SmartCollege/Contact" class="dropdown-item">Contacts</a>
+						</div>
+		</li>
+		</c:when>
+        </c:choose>
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
+        </li>
+		 <c:choose>
+      	<c:when test="${username != null}">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Logout">Logout</a>
+        </li>
+        </c:when>
+        <c:when test="${username == null}">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Login">Login</a>
+        </li>
+        </c:when>
+        </c:choose>
       </ul>
     </div>
   </div>
 </nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="/SmartCollege/NewContact"><button type="button" class="btn btn-success">New Contact</button></a></p>
-      <p><a href="/SmartCollege/NewSubject"><button type="button" class="btn btn-success">New Subject</button></a></p>
-      <p><a href="#"><button type="button" class="btn btn-success">New Student</button></a></p>
+
+  <div class="leftcolumn">
+     <c:choose>
+    <c:when test="${role == null  || role == 'STUDENT'}">
+	 <c:forEach var = "announcement" items = "${announcements}">
+	 					 <c:if test = "${announcement.available == 'Students'}">
+    <div class="card">
+      <h1>${announcement.announcementTitle }</h1>
+      <ul class="post-meta list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-calendar"></i> <a href="#">${announcement.date }</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fa fa-tag"></i> <a href="#">${announcement.tag }</a>
+                        </li>
+                    </ul>
+      <img src="${announcement.photoLink}" class="fakeimg" style="height:430px;">
+      <p>${announcement.announcementSubtitle }</p>
+      <a href="/SmartCollege/ViewAnnouncement?id=${announcement.id}" class="btn btn-outline-secondary btn-sm" style="width:9%;">Read More</a>
     </div>
-    <div class="col-sm-8 text-left" > 
-      <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+    </c:if>
+    </c:forEach>
+    </c:when>
+    </c:choose>
+    
+        <c:choose>
+    <c:when test="${role == 'ADMIN'  || role == 'PROFESSOR'}">
+	 <c:forEach var = "announcement" items = "${announcements}">
+    <div class="card">
+      <h1>${announcement.announcementTitle }</h1>
+      <img src="${announcement.photoLink}" class="fakeimg" style="height:430px;">
+      <p>${announcement.announcementSubtitle }</p>
+       <ul class="post-meta list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-calendar"></i> <a href="#">${announcement.date }</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fa fa-tag"></i> <a href="#">${announcement.tag }</a>
+                        </li>
+                    </ul>
+      <a href="/SmartCollege/ViewAnnouncement?id=${announcement.id}" class="btn btn-outline-secondary btn-sm" style="width:9%;">Read More</a>
     </div>
-  </div>
-</div>
+    </c:forEach>
+    </c:when>
+    </c:choose>
+    
+    
+    
+    </div>	
 
-<!-- Footer -->
-<footer class="page-footer font-small special-color-dark pt-4">
-
-  <!-- Footer Elements -->
-  <div class="container">
-
-    <!-- Social buttons -->
-    <ul class="list-unstyled list-inline text-center">
-      <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1">
-          <button type="button" class="btn btn-fb"><i class="fab fa-facebook-f pr-1"></i> Facebook</button>
-        </a>
-      </li>
-     <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1">
-          <button type="button" class="btn btn-yt"><i class="fab fa-youtube pr-1"></i> Youtube</button>
-        </a>
-      </li>
-     
-    </ul>
-    <!-- Social buttons -->
-
-  </div>
-  <!-- Footer Elements -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3"><span class="glyphicon glyphicon-earphone">  0731 955 240 </span>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
 
 </body>
 </html>

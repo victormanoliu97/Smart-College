@@ -3,12 +3,12 @@ package com.smartcollege.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smartcollege.dao.SubjectRepository;
-import com.smartcollege.models.Contact;
 import com.smartcollege.models.Subject;
 
 @Service
@@ -34,6 +34,11 @@ public class SubjectService {
 	public Subject findOneSubject(int id)
 	{
 		return subjectRepo.findById(id).orElse(null);
+	}
+	
+	public Set<Subject> findSubjectByYear(int id)
+	{
+		return subjectRepo.findBysubjectYear(id);
 	}
 	
 	public void saveUpdate(Subject subject)
