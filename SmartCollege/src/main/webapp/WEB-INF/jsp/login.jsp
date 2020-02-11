@@ -102,7 +102,7 @@ body{background-color: #F2F6B1;}
 
 </head>
 
-<body>
+<body style="background-color: #F2F6B1">
 	
 	<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
@@ -135,7 +135,90 @@ body{background-color: #F2F6B1;}
 
 <!-- Page Content -->
 
+	<c:choose>
+	   <c:when test="${var == 'ChangePassword' }">
+	   	
+	   	<div class="container bootstrap snippet">
+		    <div class="row">
+		        <div class="col-sm-10 offset-sm-1 text-center">
+		            <h2 class="text-center login-title"><b>RESET PASSWORD</b></h2>
+		            <div class="account-wall">
+		                <img class="profile-img" src="http://droidlessons.com/wp-content/uploads/2017/05/person-1824144_960_720-e1494184045144.png"
+		                    alt="">
+		                <form action="Reset" class="form-signin">
+			    		<input type="text" class="form-control" placeholder="Enter Email" name="username" required autofocus>
+		                <input type="password" class="form-control" placeholder="Enter old password" name="psw"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+		                <input type="password" class="form-control" placeholder="Enter new password" name="newPsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+		                <button class="btn btn-lg btn-primary btn-block" type="submit" value="reset">
+		                    Reset</button>
+		                </form>
+		            </div>
+		            <a href="/SmartCollege/Login" class="text-center new-account">Back to sign in page! </a>
+		        </div>
+		    </div>
+		</div>	
+	   	
+	</c:when>
+	</c:choose>
 	
+	
+	<c:choose>
+	   <c:when test="${var == 'fail' }">
+	   	
+	   	<div class="container bootstrap snippet">
+		    <div class="row">
+		        <div class="col-sm-10 offset-sm-1 text-center">
+		            <h2 class="text-center login-title"><b>RESET PASSWORD</b></h2>
+		            <div class="account-wall">
+		                <img class="profile-img" src="http://droidlessons.com/wp-content/uploads/2017/05/person-1824144_960_720-e1494184045144.png"
+		                    alt="">
+		                <form action="Reset" class="form-signin">
+			    		<input type="text" class="form-control" placeholder="Enter Email" name="username" required autofocus>
+		                <input type="password" class="form-control" placeholder="Enter old password" name="psw"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+		                <input type="password" class="form-control" placeholder="Enter new password" name="newPsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+		                <button class="btn btn-lg btn-primary btn-block" type="submit" value="reset">Reset</button>
+		                <br>
+		                <div class="alert alert-danger" role="alert">Your username or password are incorrect!</div>
+		                </form>
+		            </div>
+		            <a href="/SmartCollege/Login" class="text-center new-account">Back to sign in page! </a>
+		        </div>
+		    </div>
+		</div>	
+	   	
+	</c:when>
+	</c:choose>
+	
+	<c:choose>
+	   <c:when test="${var == 'succes' }">
+	   	
+	   	<div class="container bootstrap snippet">
+		    <div class="row">
+		        <div class="col-sm-10 offset-sm-1 text-center">
+		            <h2 class="text-center login-title"><b>RESET PASSWORD</b></h2>
+		            <div class="account-wall">
+		                <img class="profile-img" src="http://droidlessons.com/wp-content/uploads/2017/05/person-1824144_960_720-e1494184045144.png"
+		                    alt="">
+		                <form action="Reset" class="form-signin">
+			    		<input type="text" class="form-control" placeholder="Enter Email" name="username" required autofocus>
+		                <input type="password" class="form-control" placeholder="Enter old password" name="psw"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+		                <input type="password" class="form-control" placeholder="Enter new password" name="newPsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+		                <button class="btn btn-lg btn-primary btn-block" type="submit" value="reset">Reset</button>
+		                <br>
+		                <div class="alert alert-success" role="alert">You have successfully changed your password!</div>
+		                </form>
+		            </div>
+		            <a href="/SmartCollege/Login" class="text-center new-account">Back to sign in page! </a>
+		        </div>
+		    </div>
+		</div>	
+	   	
+	</c:when>
+	</c:choose>
+	
+	
+<c:choose>
+	   <c:when test="${var == 'login' }">	
 	<div class="container bootstrap snippet">
     <div class="row">
         <div class="col-sm-10 offset-sm-1 text-center">
@@ -145,16 +228,17 @@ body{background-color: #F2F6B1;}
                     alt="">
                 <form action="Loginn" class="form-signin">
 	    		<input type="text" class="form-control" placeholder="Enter Email" name="username" required autofocus>
-                <input type="password" class="form-control" placeholder="Enter Password" name="psw"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <input type="password" class="form-control" placeholder="Enter Password" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit" value="Loginn">
                     Sign in</button>
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Forgot Password? </a>
+            <a href="/SmartCollege/ResetPassword" class="text-center new-account">Reset Password? </a>
         </div>
     </div>
 </div>
 
-
+</c:when>
+	</c:choose>
 </body>
 </html>

@@ -198,8 +198,7 @@ strong {
 }
 
 .tile {  
-    width: 318%;
-    border-radius: 24px;
+    width: 325%;
     display: inline-block;
 	box-sizing: border-box;
 	background-color:powderblue;		
@@ -271,9 +270,14 @@ strong {
 
 </head>
 
-<body>
+<body style="background-color: #F2F6B1">
+	<%
+		if(session.getAttribute("userId")==null)
+		{
+			response.sendRedirect("login");
+		}
 	
-	<!-- Navigation -->
+	%>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
   <div class="container">
     <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
@@ -313,9 +317,13 @@ strong {
 		</li>
 		</c:when>
         </c:choose>
+        <c:choose>
+    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
         </li>
+        </c:when>
+        </c:choose>
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
         </li>
@@ -335,14 +343,15 @@ strong {
     </div>
   </div>
 </nav>
-<div class= "container">
+
+<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
 	<div class="container bootstrap snippet">
 	<div class="col-sm-4">
       <div class="tile blue">
         <h5 class="title">Courses</h5>
         <c:choose>
     	<c:when test="${role == 'PROFESSOR'}">
-          <a href="/SmartCollege/AddCourse?id=${idSubject}"><button type="button" class="btn btn-success btn-lg btn3d"><span class="glyphicon glyphicon-ok"></span> <h3><b>+</b></h3> </button></a>
+          <a href="/SmartCollege/AddCourse?id=${idSubject}"><button type="button" class="btn btn-success btn-lg btn3d"><span class="glyphicon glyphicon-ok"></span> <h3><b style="color: white;">+</b></h3> </button></a>
  		</c:when>
  		</c:choose>     
       </div>
@@ -357,10 +366,16 @@ strong {
     			<tr>
     				<th>Title</th>
     				<th>Description</th>
-    				<th>View</th>
-    				<th>Download</th>
+    				<c:choose>
+							<c:when test="${role == 'STUDENT' }">
+    				<th><span>View</span></th>
+    				<th><span>Download</span></th>
+    				</c:when>
+					</c:choose>
     				<c:choose>
 							<c:when test="${role == 'PROFESSOR' }">
+					<th class="text-center"><span>View</span></th>
+    				<th class="text-center"><span>Download</span></th>
     				<th></th>
     				<th></th>
     					</c:when>
@@ -374,7 +389,7 @@ strong {
     			<tr>
     				<td>${item.title }</td>
     				<td>${item.subtitle }</td>
-    				<td style="width: 20%;">
+    				<td>
     				<a href="/SmartCollege/ViewFile/${item.name}" class="table-link">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
@@ -392,15 +407,17 @@ strong {
 								</td>
     				<c:choose>
 							<c:when test="${role == 'PROFESSOR' }">
-							<td style="width: 20%;">
+							<td>
 								<a href="/SmartCollege/updateItem?id=${item.id }" class="table-link">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
 									</span>
 								</a>
+							</td>
+							<td>
 								<a href="/SmartCollege/DeleteFile?id=${item.id }" class="table-link danger">
-									<span class="fa-stack">
+									<span class="fa-stack" style="color: red;">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
 									</span>
@@ -417,7 +434,7 @@ strong {
     	<!-- END PROJECT TABLE -->
     </div>
     </div>
-    
+
     <div class="container bootstrap snippet">
 	<div class="col-sm-4">
       <div class="tile blue">
@@ -430,60 +447,120 @@ strong {
       </div>
 	</div>
 	</div>
-    
+    <div class="container bootstrap snippet">
     <c:forEach var = "item" items = "${content}">
     			<c:choose>
       				<c:when test="${item.category == 'Info' && role == 'STUDENT' || item.category == 'Info' && role == 'PROFESSOR'}">
-    <div class="row margin-b-30" style="margin-left: 12px;">
+    						<div class="row margin-b-30" style="margin-left: 1px;">
                                 <div class="col-sm-12 event-detail">
                                     <h3><b>${item.title }</b></h3>
                                     <p>
                                         ${item.subtitle}
+                                        <c:choose>
+							<c:when test="${role == 'PROFESSOR' }">
+									<a href="/SmartCollege/DeleteFile?id=${item.id }" >
+									<span class="fa-stack" style="float:right; color:red;">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								     <a href="/SmartCollege/updateItemInfo?id=${item.id }" class="table-link">
+									<span class="fa-stack" style="float:right; width:10%;">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								</c:when>
+								</c:choose>
                                     </p>
                                 </div>
                             </div>
-	</c:when>
-	</c:choose>
+                            <hr>
+					</c:when>
+				</c:choose>
 	</c:forEach>
-	
+	 </div>
 	<div class="container bootstrap snippet">
 	<div class="col-sm-4">
       <div class="tile blue">
         <h5 class="title">Extra Materials</h5>
         <c:choose>
     	<c:when test="${role == 'PROFESSOR'}">
-        <a href="/SmartCollege/AddInfo?id=${idSubject}"><button type="button" class="btn btn-success btn-lg btn3d"><span class="glyphicon glyphicon-ok"></span> <h3><b>+</b></h3> </button></a>
+        <a href="/SmartCollege/AddMaterials?id=${idSubject}"><button type="button" class="btn btn-success btn-lg btn3d"><span class="glyphicon glyphicon-ok"></span> <h3><b style="color: white;">+</b></h3> </button></a>
         </c:when>
         </c:choose>
       </div>
 	</div>
 	</div>
-    
-    <c:if test="${empty content}">
-     <div class="row margin-b-30" style="margin-left: 12px;">
-                                <div class="col-sm-12 event-detail">
-                                    <h3><b>Nothing was posted here!</b></h3>
-                                </div>
-                            </div>
-     </c:if>
-     <c:if test="${not empty content}">
-    <c:forEach var = "item" items = "${content}">
+	
+	<div class="container bootstrap snippet">
+    <div class="table-responsive">
+    	<!-- PROJECT TABLE -->
+    	<table class="table colored-header datatable project-list">
+    		<thead>
+    			<tr>
+    				<th>Title</th>
+    				<th>Description</th>
+					<th><span>View</span></th>
+    				<th><span>Download</span></th>
+    				<th></th>
+    				<th></th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		<c:forEach var = "item" items = "${content}">
     			<c:choose>
       				<c:when test="${item.category == 'ExtraM' && role == 'STUDENT' || item.category == 'ExtraM' && role == 'PROFESSOR'}">
-    <div class="row margin-b-30" style="margin-left: 12px;">
-                                <div class="col-sm-12 event-detail">
-                                    <h3><b>${item.title }</b></h3>
-                                    <p>
-                                        ${item.subtitle}
-                                    </p>
-                                </div>
-                            </div>
-	</c:when>
-	</c:choose>
-	</c:forEach>
-	</c:if>
+    			<tr>
+    				<td>${item.title }</td>
+    				<td>${item.subtitle }</td>
+    				<td style="width:27%;">
+    				<a href="/SmartCollege/ViewFile/${item.name}" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								</td>
+								<td style="width:27%;">
+									<a href="/SmartCollege/DownloadFile/${item.name}" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-download fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								</td>
+    				<c:choose>
+							<c:when test="${role == 'PROFESSOR' }">
+							<td>
+								<a href="/SmartCollege/updateMaterial?id=${item.id }" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+							<td>
+								<a href="/SmartCollege/DeleteFile?id=${item.id }" class="table-link danger">
+									<span class="fa-stack" style="color: red;">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+							</c:when>
+					</c:choose>
+    			</tr>
+    		</c:when>
+    		</c:choose>
+    		</c:forEach>
+    		</tbody>
+    	</table>
+    	<!-- END PROJECT TABLE -->
+    </div>
+    </div>
+	
 </div>
-
 
 </body>
 </html>

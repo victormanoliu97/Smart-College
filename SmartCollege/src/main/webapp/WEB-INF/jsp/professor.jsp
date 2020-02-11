@@ -5,165 +5,452 @@
   <title>Smart College</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="shortcut icon" href="https://png.pngtree.com/svg/20161123/97bea0669c.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content { height:450px;
-    			    padding-top:10px;
-    			  }
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top:30px;
-      background-color: #f1f1f1;
-      height:100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 29.5px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style>
-</head>
-<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+	
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/SmartCollege/Home">Home</a></li>
-        <li><a href="/SmartCollege/Professors">Professors</a></li>
-        <li><a href="/SmartCollege/Subject">Subjects</a></li>
-        <li><a href="/SmartCollege/Contact">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	
+.container bootstrap snippet
+{
+	background-color: #E3D883; 
+}					                
+body{background-color: #E3D883;}	
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+* TABLES */
+.table {
+    border-collapse: separate;
+}
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+	background-color: #eee;
+}
+.table thead > tr > th {
+	border-bottom: 1px solid #C2C2C2;
+	padding-bottom: 0;
+}
+.table tbody > tr > td {
+	font-size: 0.875em;
+	background: #f5f5f5;
+	border-top: 10px solid #fff;
+	vertical-align: middle;
+	padding: 12px 8px;
+}
+.table tbody > tr > td:first-child,
+.table thead > tr > th:first-child {
+	padding-left: 20px;
+}
+.table thead > tr > th span {
+	border-bottom: 2px solid #C2C2C2;
+	display: inline-block;
+	padding: 0 5px;
+	padding-bottom: 5px;
+	font-weight: normal;
+}
+.table thead > tr > th > a span {
+	color: #344644;
+}
+.table thead > tr > th > a span:after {
+	content: "\f0dc";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: inherit;
+	margin-left: 5px;
+	font-size: 0.75em;
+}
+.table thead > tr > th > a.asc span:after {
+	content: "\f0dd";
+}
+.table thead > tr > th > a.desc span:after {
+	content: "\f0de";
+}
+.table thead > tr > th > a:hover span {
+	text-decoration: none;
+	color: #2bb6a3;
+	border-color: #2bb6a3;
+}
+.table.table-hover tbody > tr > td {
+	-webkit-transition: background-color 0.15s ease-in-out 0s;
+	transition: background-color 0.15s ease-in-out 0s;
+}
+.table tbody tr td .call-type {
+	display: block;
+	font-size: 0.75em;
+	text-align: center;
+}
+.table tbody tr td .first-line {
+	line-height: 1.5;
+	font-weight: 400;
+	font-size: 1.125em;
+}
+.table tbody tr td .first-line span {
+	font-size: 0.875em;
+	color: #969696;
+	font-weight: 300;
+}
+.table tbody tr td .second-line {
+	font-size: 0.875em;
+	line-height: 1.2;
+}
+.table a.table-link {
+	margin: 0 5px;
+	font-size: 1.125em;
+}
+.table a.table-link:hover {
+	text-decoration: none;
+	color: #2aa493;
+}
+.table a.table-link.danger {
+	color: #fe635f;
+}
+.table a.table-link.danger:hover {
+	color: #dd504c;
+}
+
+.table-products tbody > tr > td {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #ebebeb;
+	-webkit-transition: background-color 0.15s ease-in-out 0s;
+	transition: background-color 0.15s ease-in-out 0s;
+	position: relative;
+}
+.table-products tbody > tr:hover > td {
+	text-decoration: none;
+	background-color: #f6f6f6;
+}
+.table-products .name {
+	display: block;
+	font-weight: 600;
+	padding-bottom: 7px;
+}
+.table-products .price {
+	display: block;
+	text-decoration: none;
+	width: 50%;
+	float: left;
+	font-size: 0.875em;
+}
+.table-products .price > i {
+	color: #8dc859;
+}
+.table-products .warranty {
+	display: block;
+	text-decoration: none;
+	width: 50%;
+	float: left;
+	font-size: 0.875em;
+}
+.table-products .warranty > i {
+	color: #f1c40f;
+}
+.table tbody > tr.table-line-fb > td {
+	background-color: #9daccb;
+	color: #262525;
+}
+.table tbody > tr.table-line-twitter > td {
+	background-color: #9fccff;
+	color: #262525;
+}
+.table tbody > tr.table-line-plus > td {
+	background-color: #eea59c;
+	color: #262525;
+}
+.table-stats .status-social-icon {
+	font-size: 1.9em;
+	vertical-align: bottom;
+}
+.table-stats .table-line-fb .status-social-icon {
+	color: #556484;
+}
+.table-stats .table-line-twitter .status-social-icon {
+	color: #5885b8;
+}
+.table-stats .table-line-plus .status-social-icon {
+	color: #a75d54;
+}
+
+.navbar{ 
+    background-color: #E1A7A7;
+}
+.navbar .dropdown-menu {
+  padding: 10px;
+  margin-top: 7.2px;
+  background-color: #353A40;
+}
+.navbar .dropdown-menu .dropdown-item {
+  position: relative;
+  padding: 8px 15px;
+  color: #fff;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  transition: color 0.2s ease-in;
+}
+.navbar .dropdown-menu .dropdown-item:last-child {
+  border-bottom: none;
+}
+.navbar .dropdown-menu .dropdown-item:hover {
+  background: transparent;
+  color: #c0ca33;
+}
+.navbar .dropdown-menu .dropdown-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: 5px;
+  background-color: #c0ca33;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+.navbar .dropdown-menu .dropdown-item:hover::before {
+  opacity: 1;
+}
+
+
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+	
+
+	
+</style>
+
+
+</head>
+
+<body style="background-color: #F2F6B1">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
+  <div class="container">
+    <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/News">News</a>
+        </li>
+        <c:choose>
+    	<c:when test="${role == 'PROFESSOR'}">
+        <li class="dropdown">
+						<a href="#" class="nav-item nav-link active" data-toggle="dropdown">My Subjects</a>
+						<div class="dropdown-menu">
+							<c:forEach var = "subject" items = "${profsubjects}">
+						    <input type="hidden" class="form-control" value = "${userId}" name= "idd" id= "idd" required>
+							<a href="/SmartCollege/ViewSubject?id=${subject.idSubject}&user=${userId}" class="dropdown-item">${subject.subjectName}</a>
+						    </c:forEach>
+						</div>
+		</li>
+		</c:when>
+        </c:choose>
+        <c:choose>
+    	<c:when test="${role == 'ADMIN'}">
+        <li class="dropdown">
+						<a href="#" class="nav-item nav-link active" data-toggle="dropdown">Add</a>
+						<div class="dropdown-menu">
+							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professor</a>
+							<a href="/SmartCollege/NewSubject" class="dropdown-item">Subject</a>
+							<a href="/SmartCollege/NewContact" class="dropdown-item">Contact</a>
+							<a href="/SmartCollege/AddAnnouncement" class="dropdown-item">Announcement</a>
+						</div>
+		</li>
+		<li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">View</a>
+						<div class="dropdown-menu">
+							<a href="/SmartCollege/Professors" class="dropdown-item">Professors</a>
+							<a href="/SmartCollege/Subject" class="dropdown-item">Subjects</a>
+							<a href="/SmartCollege/Contact" class="dropdown-item">Contacts</a>
+						</div>
+		</li>
+		<li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Repartition">Repartition</a>
+        </li>
+		</c:when>
+        </c:choose>
+        <c:choose>
+    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
+        </li>
+        </c:when>
+        </c:choose>
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
+        </li>
+         <c:choose>
+      	<c:when test="${username != null}">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Logout">Logout</a>
+        </li>
+        </c:when>
+        <c:when test="${username == null}">
+        <li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Login">Login</a>
+        </li>
+        </c:when>
+        </c:choose>
       </ul>
     </div>
   </div>
 </nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="/SmartCollege/NewContact"><button type="button" class="btn btn-success">New Contact</button></a></p>
-      <p><a href="/SmartCollege/NewSubject"><button type="button" class="btn btn-success">New Subject</button></a></p>
-      <p><a href="/SmartCollege/NewProfessor"><button type="button" class="btn btn-success">New Professor</button></a></p>
+
+<!-- Page Content -->
+<div class="container" >
+<c:choose>
+<c:when test="${mode == 'NEWPROFESSOR_VIEW'}">
+<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
+<form method="post" enctype="multipart/form-data" action="saveProfessorUpdate">
+    <div class="form-group">
+      <label><strong>Add professor</strong></label>
+       <input type="text" class="form-control" value= "${professor.name}" name ="name" id="name">
     </div>
-    <div class="col-sm-8 text-left">
-	<c:choose>
- 		<c:when test="${mode == 'PROFESSORS_VIEW'}">
- 			<div class="table-responsive">          
-				  <table class="table table-hover">
-				    <thead>
-				      <tr class="active">
-				        <th>Name</th>
-				        <th>Edit</th>
-				        <th>Delete</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-					      <c:forEach var = "professor" items = "${professors}">
-					      		<tr>
-					      			<td>${professor.name}</td>
-					      			<td><a href="/SmartCollege/updateProfessor?id=${professor.id }"><span class="glyphicon glyphicon-pencil"></span></a></td>
-					      			<td><a href="/SmartCollege/Professor/delete?id=${professor.id }"><span class="glyphicon glyphicon-remove"></span></a></td>
-					      		</tr>
-					      </c:forEach>
-    				</tbody>
-  					</table>
-  			</div> 
- 		</c:when>
- 		
- 		<c:when test="${mode == 'PROFESSOR_VIEW'}">
- 			 <form action= "saveProfessorUpdate" method = "post">
- 			 <input type="hidden" class="form-control" value = "${professor.id}" name= "id" id= "id">
-				  <div class="form-group">
-				    <label for="Name">Name:</label>
-				    <input type="text" class="form-control" value= "${professor.name}" name ="name" id="name">
-				  </div>
-				
-				  <button type="submit" class="btn btn-default">Submit</button>
-			</form>
- 		</c:when>
- 		
- 		<c:when test="${mode == 'NEWPROFESSOR_VIEW'}">
- 			 <form action= "saveProfessorUpdate" method = "post">
-				  <div class="form-group">
-				    <label for="Name">Name:</label>
-				    <input type="text" class="form-control" value= "${professor.name}" name ="name" id="name">
-				  </div>
-				    <button type="submit" class="btn btn-default">Submit</button>
-			</form>
+    <div class="form-group">
+      <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
+    </div>
+  </form>
+</div>
+</c:when>
+
+<c:when test="${mode == 'PROFESSOR_VIEW'}">
+ 			<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
+			<form method="post" enctype="multipart/form-data" action="saveProfessorUpdate">
+			    <div class="form-group">
+			      <label><strong>Add professor</strong></label>
+			       <input type="text" class="form-control" value= "${professor.name}" name ="name" id="name">
+			    </div>
+			    <div class="form-group">
+			      <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
+			    </div>
+			  </form>
+			</div>
  		</c:when>
 
 </c:choose>
-                                                                              
+
+
+<c:choose>
+ <c:when test="${mode == 'PROFESSORS_VIEW'}">
+ <div class="card border-0 shadow my-5">
+ <div class="main-box clearfix">
+			<div class="table-responsive">
+<table class="table user-list">
+					<thead>
+						<tr>
+							<th><span>Name</span></th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+					  <c:forEach var = "professor" items = "${professors}">
+						<tr>
+							<td>
+								<a class="user-link">${professor.name}</a>
+							</td>
+							<td style="width: 20%;">
+								<a href="/SmartCollege/updateProfessor?id=${professor.id }" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="/SmartCollege/Professor/delete?id=${professor.id }" class="table-link danger">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+						</tr>
+						</c:forEach>
+						</tbody>
+				</table>
+				</div>
+				</div>
+				</div>
+</c:when>
+</c:choose>
+
 </div>
-    
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="page-footer font-small special-color-dark pt-4">
-
-  <!-- Footer Elements -->
-  <div class="container">
-
-    <!-- Social buttons -->
-    <ul class="list-unstyled list-inline text-center">
-      <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1">
-          <button type="button" class="btn btn-fb"><i class="fab fa-facebook-f pr-1"></i> Facebook</button>
-        </a>
-      </li>
-     <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1">
-          <button type="button" class="btn btn-yt"><i class="fab fa-youtube pr-1"></i> Youtube</button>
-        </a>
-      </li>
-     
-    </ul>
-    <!-- Social buttons -->
-
-  </div>
-  <!-- Footer Elements -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3"><span class="glyphicon glyphicon-earphone">  0731 955 240 </span>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-
 </body>
 </html>

@@ -12,7 +12,43 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
 	
-
+.navbar{ 
+    background-color: #E1A7A7;
+}
+.navbar .dropdown-menu {
+  padding: 10px;
+  margin-top: 7.2px;
+  background-color: #353A40;
+}
+.navbar .dropdown-menu .dropdown-item {
+  position: relative;
+  padding: 8px 15px;
+  color: #fff;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  transition: color 0.2s ease-in;
+}
+.navbar .dropdown-menu .dropdown-item:last-child {
+  border-bottom: none;
+}
+.navbar .dropdown-menu .dropdown-item:hover {
+  background: transparent;
+  color: #c0ca33;
+}
+.navbar .dropdown-menu .dropdown-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: 5px;
+  background-color: #c0ca33;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+.navbar .dropdown-menu .dropdown-item:hover::before {
+  opacity: 1;
+}
 	
 .container bootstrap snippet
 {
@@ -112,7 +148,16 @@ label {
 
 </head>
 
-<body>
+<body style="background-color: #F2F6B1">
+
+
+<%
+		if(session.getAttribute("userId")==null)
+		{
+			response.sendRedirect("login");
+		}
+	
+	%>
 	
 	<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
@@ -142,9 +187,37 @@ label {
 		</li>
 		</c:when>
         </c:choose>
+         <c:choose>
+    	<c:when test="${role == 'ADMIN'}">
+        <li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">Add</a>
+						<div class="dropdown-menu">
+						    <a href="/SmartCollege/AddAnnouncement" class="dropdown-item">Announcement</a>
+							<a href="/SmartCollege/NewSubject" class="dropdown-item">Subject</a>
+							<a href="/SmartCollege/NewContact" class="dropdown-item">Contact</a>
+							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professor</a>	
+						</div>
+		</li>
+		<li class="dropdown">
+						<a href="#" class="nav-item nav-link" data-toggle="dropdown">View</a>
+						<div class="dropdown-menu">
+							<a href="/SmartCollege/Professors" class="dropdown-item">Professors</a>
+							<a href="/SmartCollege/Subject" class="dropdown-item">Subjects</a>
+							<a href="/SmartCollege/Contact" class="dropdown-item">Contacts</a>
+						</div>
+		</li>
+		<li class="nav-item">
+          <a class="nav-link" href="/SmartCollege/Repartition">Repartition</a>
+        </li>
+        </c:when>
+        </c:choose>
+        <c:choose>
+    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
         </li>
+        </c:when>
+        </c:choose>
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
         </li>
@@ -164,8 +237,6 @@ label {
     </div>
   </div>
 </nav>
-
-<!-- Page Content -->
 
 
 <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
