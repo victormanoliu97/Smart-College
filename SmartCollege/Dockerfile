@@ -1,3 +1,4 @@
 FROM tomcat:8.0.51-jre8-alpine
-COPY ./target/smart_college.war /usr/local/tomcat/webapps/
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY ./target/smart_college.war /usr/local/tomcat/webapps/ROOT.war
 CMD ["catalina.sh", "run"]

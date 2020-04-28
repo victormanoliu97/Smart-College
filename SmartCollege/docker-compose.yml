@@ -10,7 +10,7 @@ services:
       - spring.datasource.url=jdbc:mysql://mysql-docker:3306/smart_college
       - spring.datasource.username=sa
       - spring.datasource.password=password
-      - spring.jpa.hibernate.ddl-auto=create-drop
+      - spring.jpa.hibernate.ddl-auto=update
     networks:
        - smart_college_network
     depends_on:
