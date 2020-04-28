@@ -2,7 +2,6 @@ package com.smartcollege.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +22,12 @@ public class AnnouncementService {
 		for(Announcement announcement : announcementRepo.findAll()){
 			announcements.add(announcement);
 		}
-		Collections.reverse(announcements);
 		return announcements;
 	}
 	
 	public void addAnnouncement(Announcement announcement)
 	{
 		announcementRepo.save(announcement);
-	}
-	
-	public void deleteAnnouncement(int id)
-	{
-		announcementRepo.deleteById(id);
 	}
 	
 	public Announcement findAnnouncement(int id)

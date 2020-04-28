@@ -249,7 +249,7 @@ h1 {
 		<li class="dropdown">
 						<a href="#" class="nav-item nav-link" data-toggle="dropdown">View</a>
 						<div class="dropdown-menu">
-							<a href="/SmartCollege/Professors" class="dropdown-item">Professors</a>
+							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professors</a>
 							<a href="/SmartCollege/Subject" class="dropdown-item">Subjects</a>
 							<a href="/SmartCollege/Contact" class="dropdown-item">Contacts</a>
 						</div>
@@ -259,17 +259,9 @@ h1 {
         </li>
 		</c:when>
         </c:choose>
-        <c:choose>
-    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
-        <c:choose>
-    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
         </li>
-        </c:when>
-        </c:choose>
-        </c:when>
-        </c:choose>
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
         </li>

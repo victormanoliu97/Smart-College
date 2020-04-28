@@ -29,8 +29,4 @@ public class UserService {
 		userRepo.save(user);
 	}
 	
-	public void updateUser(User user)
-	{
-		userRepo.save(user);
-	}
 }

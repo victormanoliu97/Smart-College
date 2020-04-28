@@ -13,43 +13,6 @@
 <style>
 	
 
-.navbar{ 
-    background-color: #E1A7A7;
-}
-.navbar .dropdown-menu {
-  padding: 10px;
-  margin-top: 7.2px;
-  background-color: #353A40;
-}
-.navbar .dropdown-menu .dropdown-item {
-  position: relative;
-  padding: 8px 15px;
-  color: #fff;
-  font-size: 1.2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, .1);
-  transition: color 0.2s ease-in;
-}
-.navbar .dropdown-menu .dropdown-item:last-child {
-  border-bottom: none;
-}
-.navbar .dropdown-menu .dropdown-item:hover {
-  background: transparent;
-  color: #c0ca33;
-}
-.navbar .dropdown-menu .dropdown-item::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  width: 5px;
-  background-color: #c0ca33;
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
-}
-.navbar .dropdown-menu .dropdown-item:hover::before {
-  opacity: 1;
-}
 	
 .container bootstrap snippet
 {
@@ -139,15 +102,9 @@ body{background-color: #E3D883;}
 
 </head>
 
-<body style="background-color: #F2F6B1">
+<body>
 	
-	<%
-		if(session.getAttribute("userId")==null)
-		{
-			response.sendRedirect("login");
-		}
-	
-	%>	
+	<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
   <div class="container">
     <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
@@ -175,37 +132,9 @@ body{background-color: #E3D883;}
 		</li>
 		</c:when>
         </c:choose>
-        <c:choose>
-        <c:when test="${role == 'ADMIN'}">
-        <li class="dropdown">
-						<a href="#" class="nav-item nav-link" data-toggle="dropdown">Add</a>
-						<div class="dropdown-menu">
-						<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professor</a>
-							<a href="/SmartCollege/NewSubject" class="dropdown-item">Subject</a>
-							<a href="/SmartCollege/NewContact" class="dropdown-item">Contact</a>
-							<a href="/SmartCollege/AddAnnouncement" class="dropdown-item">Announcement</a>	
-						</div>
-		</li>
-		<li class="dropdown">
-						<a href="#" class="nav-item nav-link" data-toggle="dropdown">View</a>
-						<div class="dropdown-menu">
-							<a href="/SmartCollege/Professors" class="dropdown-item">Professors</a>
-							<a href="/SmartCollege/Subject" class="dropdown-item">Subjects</a>
-							<a href="/SmartCollege/Contact" class="dropdown-item">Contacts</a>
-						</div>
-		</li>
-		<li class="nav-item">
-          <a class="nav-link active" href="/SmartCollege/Repartition">Repartition</a>
-        </li>
-        </c:when>
-        </c:choose>
-		<c:choose>
-    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
         </li>
-        </c:when>
-        </c:choose>
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
         </li>
@@ -227,7 +156,6 @@ body{background-color: #E3D883;}
 </nav>
 
 <!-- Page Content -->
-<div class="container" >
 
 <c:choose>
  <c:when test="${mode == 'course'}">
@@ -261,7 +189,7 @@ body{background-color: #E3D883;}
 <c:choose>
  <c:when test="${mode == 'UPDATE'}">
 <div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
-  <form method="post" enctype="multipart/form-data" action="saveItemUpdate?id=${IDEEEU}&idFile=${item.id}">
+  <form method="post" enctype="multipart/form-data" action="saveItemUpdate?id=${IDEEEU}">
    <input type="hidden" class="form-control" value = "${userId}" name= "idd" id= "idd" required>
     <div class="form-group">
       <label><strong>Upload Course</strong></label>
@@ -274,55 +202,9 @@ body{background-color: #E3D883;}
       <div class="form-group">
       	<input type="hidden" class="form-control" value="Course" name="category" required autofocus>
       </div>
-    </div>
-    <div class="form-group">
-      <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
-    </div>
-  </form>
-</div>
-</c:when>
-</c:choose>
-
-<c:choose>
- <c:when test="${mode == 'UPDATEMATERIAL'}">
-<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
-  <form method="post" enctype="multipart/form-data" action="saveMaterialUpdate?id=${IDEEEU}&idFile=${item.id}">
-   <input type="hidden" class="form-control" value = "${userId}" name= "idd" id= "idd" required>
-    <div class="form-group">
-      <label><strong>Upload Material</strong></label>
-      <div class="form-group">
-      	<input type="text" class="form-control" value="${item.title}" name="title" required autofocus>
-      </div>
-      <div class="form-group">
-      	<input type="text" class="form-control"  value="${item.subtitle}" name="description" required autofocus>
-      </div>
-      <div class="form-group">
-      	<input type="hidden" class="form-control" value="ExtraM" name="category" required autofocus>
-      </div>
-    </div>
-    <div class="form-group">
-      <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
-    </div>
-  </form>
-</div>
-</c:when>
-</c:choose>
-
-<c:choose>
- <c:when test="${mode == 'UPDATEINFO'}">
-<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
-  <form method="post" enctype="multipart/form-data" action="saveItemUpdateInfo?id=${IDEEEU}&idFile=${item.id}">
-   <input type="hidden" class="form-control" value = "${userId}" name= "idd" id= "idd" required>
-    <div class="form-group">
-      <label><strong>Upload Info</strong></label>
-      <div class="form-group">
-      	<input type="text" class="form-control" value="${item.title}" name="title" required autofocus>
-      </div>
-      <div class="form-group">
-      	<input type="text" class="form-control"  value="${item.subtitle}" name="description" required autofocus>
-      </div>
-      <div class="form-group">
-      	<input type="hidden" class="form-control" value="Info" name="category" required autofocus>
+      <div class="custom-file">
+        <input type="file" name="file" value="${item.data}" multiple class="custom-file-input" id="customFile" title="Please select one file" required autofocus>
+        <label class="custom-file-label" for="customFile">Choose file</label>
       </div>
     </div>
     <div class="form-group">
@@ -346,26 +228,7 @@ body{background-color: #E3D883;}
     </div>
     <div class="form-group">
       <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
-  </form>
-</div>
-</c:when>
-</c:choose>
-
-<c:choose>
- <c:when test="${mode == 'succes'}">
-<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
-<form method="post" enctype="multipart/form-data" action="processCSV">
-    <div class="form-group">
-      <label><strong>Upload CSV file</strong></label>
-      <div class="custom-file">
-        <input type="file" name="file" multiple class="custom-file-input" id="customFile" title="Please select one file" required autofocus>
-        <label class="custom-file-label" for="customFile">Choose file</label>
-      </div>
     </div>
-    <div class="form-group">
-      <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
-    </div>
-    <div class="alert alert-success" role="alert">You have successfully added the students!</div>
   </form>
 </div>
 </c:when>
@@ -400,40 +263,6 @@ body{background-color: #E3D883;}
 </c:when>
 </c:choose>
 
-
-<c:choose>
- <c:when test="${mode == 'ExtraM'}">
-<div class="col-sm-12 col-lg-8 mr-auto ml-auto border p-4" style="background-color:white;">
-  <form method="post" enctype="multipart/form-data" action="/uploadMaterial?id=${IDEEEU}">
-   <input type="hidden" class="form-control" value = "${userId}" name= "idd" id= "idd" required>
-    <div class="form-group">
-      <label><strong>Upload Material</strong></label>
-      <div class="form-group">
-      	<input type="hidden" class="form-control" value="ExtraM" name="category" required autofocus>
-      </div>
-      <div class="form-group">
-      	<input type="text" class="form-control" placeholder="Enter Title" name="title" required autofocus>
-      </div>
-      <div class="input-group">
-       <div class="input-group-prepend">
-          <span class="input-group-text">Enter Description</span>
-       </div>
-         <textarea class="form-control" name="description"></textarea>
-      </div>
-      <div class="custom-file">
-        <input type="file" name="file" multiple class="custom-file-input" id="customFile" title="Please select one file" required autofocus>
-        <label class="custom-file-label" for="customFile">Choose file</label>
-      </div>
-    </div>
-      
-    <div class="form-group">
-      <button type="submit" name="submit" class="btn btn-block btn-dark">Upload</button>
-    </div>
-  </form>
-</div>
-</c:when>
-</c:choose>
-
 <script>
 $(document).ready(function() {
 	  $('input[type="file"]').on("change", function() {
@@ -454,6 +283,6 @@ $(document).ready(function() {
 	  });
 	});
 </script>
-</div>
+
 </body>
 </html>

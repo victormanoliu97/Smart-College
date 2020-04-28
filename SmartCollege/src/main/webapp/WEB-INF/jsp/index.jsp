@@ -228,7 +228,7 @@ p { color: #4c4a37; font-family: 'Source Sans Pro', sans-serif; font-size: 18px;
                             <i class="fa fa-tag"></i> <a href="#">${announcement.tag }</a>
                         </li>
                     </ul>
-      <a href="/SmartCollege/ViewAnnouncement?id=${announcement.id}" class="btn btn-outline-secondary btn-sm" style="width:9%;">Read More</a>
+      <a href="#" class="btn btn-outline-secondary btn-sm" style="width:9%;">Read More</a>
     </div>
     </c:forEach>
     </c:when>

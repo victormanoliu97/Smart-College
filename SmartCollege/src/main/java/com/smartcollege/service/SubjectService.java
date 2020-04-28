@@ -13,7 +13,7 @@ import com.smartcollege.models.Subject;
 
 @Service
 public class SubjectService {
-	
+
 	@Autowired
 	private SubjectRepository subjectRepo;
 	
@@ -41,14 +41,14 @@ public class SubjectService {
 		return subjectRepo.findBysubjectYear(id);
 	}
 	
-	public void saveUpdate(Subject subject)
-	{
+	public void saveUpdate(Subject subject) {
 		subjectRepo.save(subject);
 	}
+
 	
 	public void addContact(Subject subject)
 	{
 		subjectRepo.save(subject);
 	}
-	
-}
+	}
+

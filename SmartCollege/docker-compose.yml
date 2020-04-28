@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  smart_college:
+    image: smart_college
+    container_name: smart_college_container
+    ports:
+    - '8081:8080'
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysql-docker:3306/smart_college
+      - spring.datasource.username=sa
+      - spring.datasource.password=password
+      - spring.jpa.hibernate.ddl-auto=create-drop
+    networks:
+       - smart_college_network
+    depends_on:
+      - smart_college_db
+
+  smart_college_db:
+    image: mysql:5.6
+    container_name: mysql-docker
+    ports:
+    - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=sa
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=smart_college
+    networks:
+       - smart_college_network
+
+networks:
+  smart_college_network:

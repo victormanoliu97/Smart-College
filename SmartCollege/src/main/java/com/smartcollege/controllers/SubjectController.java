@@ -92,23 +92,7 @@ public class SubjectController {
 	
 	@PostMapping("/SmartCollege/saveSubjectUpdate")
 	public String saveUpdate(@ModelAttribute Subject subject,HttpServletRequest req) 
-	{	
-		String str = (String) req.getParameter("lala");
-		Subject subject1 = subjectServ.findOneSubject(subject.getIdSubject());
-		subject.setProfessors(subject1.getProfessors());
-		if(str.equals("")==false) {
-		Professor ex = profServ.findProfessorByName(str);
-		if(subject.getProfessors().equals(null))
-		{
-		  Set<Professor> abc = new HashSet<Professor>();
-		  abc.add(ex);
-		  subject.setProfessors(abc);
-		}
-		else
-		{
-			subject.getProfessors().add(ex);
-		}
-		}
+	{
 		subjectServ.saveUpdate(subject);
 		req.setAttribute("subjects", subjectServ.findAllSubjects());
 		req.setAttribute("mode", "SUBJECTS_VIEW");
@@ -127,14 +111,16 @@ public class SubjectController {
 	}
 	
 	@GetMapping("/SmartCollge/AddProfessor")
-	public void addProfessorSubj(@RequestParam String id, HttpServletRequest req,HttpServletResponse resp) throws IOException
+	public void addProfessorSubj(@RequestParam String id,@RequestParam String name, HttpServletRequest req,HttpServletResponse resp) throws IOException
 	{
-//		//Professor ex = profServ.findProfessorByName(s);
-//		Subject sub = subjectServ.findOneSubject(Integer.parseInt(id));
-//		sub.getProfessors().add(ex);
-//		subjectServ.saveUpdate(sub);
-//		url = req.getHeader("referer");
-//		resp.sendRedirect(url);
+		String s= req.getParameter("City");
+		String s2= name;
+		Professor ex = profServ.findProfessorByName(s);
+		Subject sub = subjectServ.findOneSubject(Integer.parseInt(id));
+		sub.getProfessors().add(ex);
+		subjectServ.saveUpdate(sub);
+		url = req.getHeader("referer");
+		resp.sendRedirect(url);
 	}
 	
 	@GetMapping("/SmartCollege/Subject/delete")

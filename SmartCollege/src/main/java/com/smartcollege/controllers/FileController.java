@@ -40,122 +40,56 @@ public class FileController {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	String path;
+	String lala;
 	
 	@PostMapping("/uploadFile")
-    public void uploadFile(@RequestParam("file") MultipartFile file,@RequestParam String id,@RequestParam String idd, HttpServletRequest request,HttpServletResponse resp) throws IOException {
+    public String uploadFile(@RequestParam("file") MultipartFile file,@RequestParam String id,@RequestParam String idd, HttpServletRequest request) throws IOException {
 		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String category = request.getParameter("category");
     	fileServ.addFile(new File(Integer.parseInt(idd),Integer.parseInt(id),file.getSize(),file.getOriginalFilename(),title, description, category, file.getBytes()));
     	//fileServ.addFile(new File(Integer.parseInt(idd),Integer.parseInt(id),file.getSize(),file.getOriginalFilename(),file.getBytes()));
-    	resp.sendRedirect(path);
+        return "home";
     }
 	
 	@PostMapping("/uploadInfo")
-    public void uploadFile(@RequestParam String id,@RequestParam String idd, HttpServletRequest request,HttpServletResponse resp) throws IOException {
+    public String uploadFile(@RequestParam String id,@RequestParam String idd, HttpServletRequest request) throws IOException {
 		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String category = request.getParameter("category");
     	fileServ.addFile(new File(Integer.parseInt(idd),Integer.parseInt(id),null,null,title, description, category,null));
     	//fileServ.addFile(new File(Integer.parseInt(idd),Integer.parseInt(id),file.getSize(),file.getOriginalFilename(),file.getBytes()));
-    	resp.sendRedirect(path);
-    }
-	
-	@PostMapping("/uploadMaterial")
-    public void uploadMaterial(@RequestParam("file") MultipartFile file,@RequestParam String id,@RequestParam String idd, HttpServletRequest request,HttpServletResponse resp) throws IOException {
-		
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String category = request.getParameter("category");
-    	fileServ.addFile(new File(Integer.parseInt(idd),Integer.parseInt(id),file.getSize(),file.getOriginalFilename(),title, description, category, file.getBytes()));
-    	resp.sendRedirect(path);
+        return "home";
     }
 	
 	@GetMapping("/SmartCollege/DeleteFile")
 	public void removeFile(@RequestParam int id,HttpServletRequest req,HttpServletResponse resp) throws IOException
 	{	
 		fileServ.removeFile(id);
-		String path = req.getHeader("referer");
-		resp.sendRedirect(path);
+		String lala = req.getHeader("referer");
+		resp.sendRedirect(lala);
 	}
 	
 	@GetMapping("/SmartCollege/updateItem")
 	public String updateContact(@RequestParam int id, HttpServletRequest req) {
 		req.setAttribute("item", fileServ.findOneFile(id));
 		req.setAttribute("IDEEEU", fileServ.findOneFile(id).getIdSubject());
-	    path = req.getHeader("referer");
+	    lala = req.getHeader("referer");
 		req.setAttribute("mode", "UPDATE");
 		return "addItemProfessor";
 	}
 	
-	
-	@GetMapping("/SmartCollege/updateMaterial")
-	public String updateMaterial(@RequestParam int id, HttpServletRequest req) {
-		req.setAttribute("item", fileServ.findOneFile(id));
-		req.setAttribute("IDEEEU", fileServ.findOneFile(id).getIdSubject());
-	    path = req.getHeader("referer");
-		req.setAttribute("mode", "UPDATEMATERIAL");
-		return "addItemProfessor";
-	}
-	
-	@GetMapping("/SmartCollege/updateItemInfo")
-	public String updateInfo(@RequestParam int id, HttpServletRequest req) {
-		req.setAttribute("item", fileServ.findOneFile(id));
-		req.setAttribute("IDEEEU", fileServ.findOneFile(id).getIdSubject());
-	    path = req.getHeader("referer");
-		req.setAttribute("mode", "UPDATEINFO");
-		return "addItemProfessor";
-	}
-	
-	
-	
 	@PostMapping("/SmartCollege/saveItemUpdate")
-	public void saveUpdate(@RequestParam String id,@RequestParam String idd,@RequestParam int idFile,HttpServletRequest request,HttpServletResponse resp) throws NumberFormatException, IOException {
+	public void saveUpdate(@RequestParam("file") MultipartFile file,@RequestParam String id,@RequestParam String idd,HttpServletRequest request,HttpServletResponse resp) throws NumberFormatException, IOException {
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String category = request.getParameter("category");
-		File f = fileServ.findOneFile(idFile);
-		f.setCategory(category);
-		f.setTitle(title);
-		f.setSubtitle(description);
-		f.setIdProf(Integer.parseInt(idd));
-		f.setIdSubject(Integer.parseInt(id));
-		fileServ.saveUpdate(f);
-		resp.sendRedirect(path);
+		fileServ.saveUpdate(new File(Integer.parseInt(idd),Integer.parseInt(id),file.getSize(),file.getOriginalFilename(),title, description, category, file.getBytes()));
+		resp.sendRedirect(lala);
 	}
 	
-	@PostMapping("/SmartCollege/saveMaterialUpdate")
-	public void saveMaterialUpdate(@RequestParam String id,@RequestParam String idd,@RequestParam int idFile,HttpServletRequest request,HttpServletResponse resp) throws NumberFormatException, IOException {
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String category = request.getParameter("category");
-		File f = fileServ.findOneFile(idFile);
-		f.setCategory(category);
-		f.setTitle(title);
-		f.setSubtitle(description);
-		f.setIdProf(Integer.parseInt(idd));
-		f.setIdSubject(Integer.parseInt(id));
-		fileServ.saveUpdate(f);
-		resp.sendRedirect(path);
-	}
-	
-	@PostMapping("/SmartCollege/saveItemUpdateInfo")
-	public void saveUpdateInfo(@RequestParam String id,@RequestParam String idd,@RequestParam int idFile, HttpServletRequest request,HttpServletResponse resp) throws NumberFormatException, IOException {
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String category = request.getParameter("category");
-		File f = fileServ.findOneFile(idFile);
-		f.setCategory(category);
-		f.setTitle(title);
-		f.setSubtitle(description);
-		f.setIdProf(Integer.parseInt(idd));
-		f.setIdSubject(Integer.parseInt(id));
-		fileServ.saveUpdate(f);
-		resp.sendRedirect(path);
-	}
 	
 	@GetMapping("/SmartCollege/AddCourse")
 	public String addCourse(@RequestParam String id,HttpServletRequest request)
@@ -163,17 +97,6 @@ public class FileController {
 		HttpSession session = request.getSession();
 		session.setAttribute("IDEEEU", id);
 		session.setAttribute("mode", "course");
-		path = request.getHeader("referer");
-		return "addItemProfessor";
-	}
-	
-	@GetMapping("/SmartCollege/AddMaterials")
-	public String addMaterials(@RequestParam String id,HttpServletRequest request)
-	{   
-		HttpSession session = request.getSession();
-		session.setAttribute("IDEEEU", id);
-		session.setAttribute("mode", "ExtraM");
-		path = request.getHeader("referer");
 		return "addItemProfessor";
 	}
 	
@@ -186,9 +109,8 @@ public class FileController {
 	}
 	
 	@PostMapping("/SmartCollege/processCSV")
-	public String processCSV(@RequestParam("file") MultipartFile file,HttpServletRequest req,HttpServletResponse resp) throws IOException
+	public void processCSV(@RequestParam("file") MultipartFile file,HttpServletRequest req,HttpServletResponse resp) throws IOException
 	{	
-		req.setAttribute("mode", "succes");
 		java.io.File document = new java.io.File(file.getOriginalFilename());
 		try {
 			Scanner scanner = new Scanner(new java.io.File(document.getAbsolutePath()));
@@ -215,9 +137,9 @@ public class FileController {
 		}catch (Exception e)
 		{
 			e.printStackTrace();
-			req.setAttribute("mode", "fail");
 		}
-		return "addItemProfessor";
+		String lala = req.getHeader("referer");
+		resp.sendRedirect(lala);
 	}
 	
 	@GetMapping("/SmartCollege/AddInfo")
@@ -226,7 +148,6 @@ public class FileController {
 		HttpSession session = request.getSession();
 		session.setAttribute("IDEEEU", id);
 		session.setAttribute("mode", "info");
-		path = request.getHeader("referer");
 		return "addItemProfessor";
 	}
 	

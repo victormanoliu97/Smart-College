@@ -162,16 +162,9 @@ p, .p {
 
 </head>
 
-<body style="background-color: #F2F6B1">
+<body>
 	
-	<%
-		if(session.getAttribute("userId")==null)
-		{
-			response.sendRedirect("login");
-		}
-	
-	%>
-	
+	<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
   <div class="container">
     <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
@@ -194,13 +187,9 @@ p, .p {
 							<a href="/SmartCollege/ThirdYear" class="dropdown-item">Third Year</a>
 						</div>
 		</li>
-        <c:choose>
-    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
         </li>
-        </c:when>
-        </c:choose>
 		<li class="nav-item">
           <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
         </li>

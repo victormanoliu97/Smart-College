@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -115,11 +116,9 @@ public class Announcement {
 	public String getAvailable() {
 		return available;
 	}
-
+	
 	public void setAvailable(String available) {
 		this.available = available;
 	}
-	
-	
 	
 }

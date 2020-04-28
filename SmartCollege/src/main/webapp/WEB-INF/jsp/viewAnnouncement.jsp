@@ -364,14 +364,7 @@ Template sidebar
 
 <body style="background-color: #F2F6B1">
 	
-	<%
-		if(session.getAttribute("userId")==null)
-		{
-			response.sendRedirect("login");
-		}
-	
-	%>
-	
+	<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark static-top mb-5 shadow">
   <div class="container">
     <a class="navbar-brand" href="#" style="color:MediumSeaGreen;"> <b><mark>Smart</mark></b> College </a>
@@ -420,26 +413,22 @@ Template sidebar
 							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professor</a>
 							<a href="/SmartCollege/NewSubject" class="dropdown-item">Subject</a>
 							<a href="/SmartCollege/NewContact" class="dropdown-item">Contact</a>
-							<a href="/SmartCollege/AddAnnouncement" class="dropdown-item">Announcement</a>
+							<a href="/SmartCollege/AddAnnouncement" class="dropdown-item"></a>
 						</div>
 		</li>
 		<li class="dropdown">
 						<a href="#" class="nav-item nav-link" data-toggle="dropdown">View</a>
 						<div class="dropdown-menu">
-							<a href="/SmartCollege/Professors" class="dropdown-item">Professors</a>
+							<a href="/SmartCollege/NewProfessor" class="dropdown-item">Professors</a>
 							<a href="/SmartCollege/Subject" class="dropdown-item">Subjects</a>
 							<a href="/SmartCollege/Contact" class="dropdown-item">Contacts</a>
 						</div>
 		</li>
 		</c:when>
         </c:choose>
-      	<c:choose>
-    	<c:when test="${role == 'STUDENT' || role == 'PROFESSOR' || role == null}">
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/Contact">Contact</a>
         </li>
-        </c:when>
-        </c:choose>
         <li class="nav-item">
           <a class="nav-link" href="/SmartCollege/AboutUs">About Us</a>
         </li>

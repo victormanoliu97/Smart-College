@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.smartcollege.models.User;
 import com.smartcollege.service.ProfessorService;
 import com.smartcollege.service.UserService;
 
@@ -41,18 +40,18 @@ public class LoginController {
 			if(userServ.findOneUser(userServ.findUser(username,password)).getUserRole().equals("ADMIN"))
 			{
 				session.setAttribute("username", userServ.findOneUser(userServ.findUser(username,password)).getUsername());
-				response.sendRedirect("News");
+				response.sendRedirect("Home");
 			}
 			else if(userServ.findOneUser(userServ.findUser(username,password)).getUserRole().equals("PROFESSOR"))
 			{
-				response.sendRedirect("News");
+				response.sendRedirect("Home");
 				session.setAttribute("username", profServ.getProfessorById(userServ.findUser(username,password)).getName());
 				session.setAttribute("profsubjects", profServ.getProfessorById(userServ.findUser(username,password)).getSubjects());
 			}
 			else 
 			{
 				session.setAttribute("username", userServ.findOneUser(userServ.findUser(username,password)).getUsername());
-				response.sendRedirect("News");
+				response.sendRedirect("Home");
 			}
 		}
 	}
@@ -65,36 +64,6 @@ public class LoginController {
 		session.removeAttribute("username");
 		session.removeAttribute("role");
 		session.invalidate();
-		response.sendRedirect("News");
-	}
-	
-	@GetMapping("/SmartCollege/ResetPassword")
-	public String resetPassword(HttpServletRequest req)
-	{   
-		req.setAttribute("var", "ChangePassword");
-		return "login";
-	}
-	
-	@GetMapping("/SmartCollege/Reset")
-	public String getCredentials(HttpServletRequest request, HttpServletResponse response) throws IOException
-	{
-		String username = request.getParameter("username");
-		String password = request.getParameter("psw");
-		String newPassword = request.getParameter("newPsw");
-		
-		if(userServ.findUser(username, password) == null)
-		{	
-			request.setAttribute("var", "fail");
-			return "login";
-		}
-		else if(userServ.findUser(username, password) != 0)
-		{
-			User u = userServ.findOneUser(userServ.findUser(username,password));
-			u.setPassword(newPassword);
-			userServ.updateUser(u);
-			request.setAttribute("var", "succes");
-			return "login";
-		}
-		return "login";
+		response.sendRedirect("Home");
 	}
 }

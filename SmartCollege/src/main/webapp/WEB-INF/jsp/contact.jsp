@@ -20,40 +20,6 @@
   -o-background-size: cover;
 }	
 
-.navbar .dropdown-menu {
-  padding: 10px;
-  margin-top: 7.2px;
-  background-color: #353A40;
-}
-.navbar .dropdown-menu .dropdown-item {
-  position: relative;
-  padding: 8px 15px;
-  color: #fff;
-  font-size: 1.2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, .1);
-  transition: color 0.2s ease-in;
-}
-.navbar .dropdown-menu .dropdown-item:last-child {
-  border-bottom: none;
-}
-.navbar .dropdown-menu .dropdown-item:hover {
-  background: transparent;
-  color: #c0ca33;
-}
-.navbar .dropdown-menu .dropdown-item::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  width: 5px;
-  background-color: #c0ca33;
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
-}
-.navbar .dropdown-menu .dropdown-item:hover::before {
-  opacity: 1;
-}
 
 
 /* USER LIST TABLE */

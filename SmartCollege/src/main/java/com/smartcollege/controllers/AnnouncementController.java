@@ -45,7 +45,7 @@ public class AnnouncementController {
 	
 	@GetMapping("/SmartCollege/ViewAnnouncement")
 	public String viewAnnouncement(@RequestParam int id, HttpServletRequest req)
-	{	
+	{
 		req.setAttribute("ann", announcementService.findAnnouncement(id));
 		return "viewAnnouncement";
 	}
